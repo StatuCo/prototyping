@@ -1,0 +1,94 @@
+@import url(fontawesome.min.css);
+body {
+  overflow-x: hidden; }
+
+.prototype {
+  width: 100%;
+  height: 100vh; }
+  .prototype__hotspot {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    max-width: 100%;
+    z-index: 8;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin-left: auto;
+    margin-right: auto; }
+    .prototype__hotspot span {
+      position: absolute;
+      cursor: pointer;
+      opacity: 0;
+      box-shadow: inset 0 0 0 2px #007ec1, 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+      background-color: rgba(154, 220, 255, 0.6);
+      border-radius: 2px;
+      transition: opacity 0.2s cubic-bezier(0.645, 0.045, 0.355, 1); }
+    .prototype__hotspot--active span {
+      opacity: 1; }
+  .prototype__screen {
+    text-align: center;
+    user-select: none;
+    position: relative; }
+    .prototype__screen img {
+      max-width: 100%;
+      user-select: none; }
+  .prototype__zoom {
+    zoom: 1; }
+  .prototype__footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 0 10px 10px 10px;
+    display: flex;
+    z-index: 12; }
+    .prototype__footer-item {
+      display: inline-flex;
+      width: fit-content;
+      background: rgba(249, 250, 252, 0.94);
+      box-shadow: 1px 0 0 0 rgba(31, 45, 61, 0.08), 0 1px 0 0 rgba(31, 45, 61, 0.08), -1px 0 0 0 rgba(31, 45, 61, 0.08), 0 -1px 0 0 rgba(31, 45, 61, 0.08);
+      transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1); }
+
+.loader {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: #55D3D2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 999; }
+  .loader__images {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 46px; }
+    .loader__images img {
+      height: 76px;
+      user-select: none; }
+  .loader__bar {
+    height: 4px;
+    width: 160px;
+    display: flex;
+    background: rgba(255, 255, 255, 0.4); }
+    .loader__bar span {
+      background: rgba(255, 255, 255, 0.9);
+      transition: all 1.5s cubic-bezier(0.09, 0.74, 0.72, 0.3);
+      width: 4%; }
+    .loader__bar--active span {
+      width: 99% !important; }
+  .loader__site {
+    overflow: hidden;
+    display: fixed; }
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s; }
+
+.fade-enter, .fade-leave-to {
+  opacity: 0; }
+
+/*# sourceMappingURL=style.css.map */

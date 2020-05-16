@@ -1,0 +1,122 @@
+@import "fontawesome.min.css";
+
+body {
+  overflow-x: hidden;
+}
+
+.prototype {
+  width: 100%;
+  height: 100vh;
+
+  &__hotspot {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    max-width: 100%;
+    z-index: 8;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin-left: auto;
+    margin-right: auto;
+
+    span {
+      position: absolute;
+      cursor: pointer;
+      opacity: 0;
+      box-shadow: inset 0 0 0 2px #007ec1, 0 2px 4px 0 rgba(0,0,0,.1);
+      background-color: rgba(154,220,255,.6);
+      border-radius: 2px;
+      transition: opacity .2s cubic-bezier(.645,.045,.355,1);
+    }
+    &--active {
+      span {
+        opacity: 1;
+      }
+    }
+  }
+  &__screen {
+    text-align: center;
+    user-select: none;
+    position: relative;
+
+    img {
+      max-width: 100%;
+      user-select: none;
+    }
+  }
+  &__zoom {
+    zoom: 1;
+  }
+  &__footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 0 10px 10px 10px;
+    display: flex;
+    z-index: 12;
+
+    &-item {
+      display: inline-flex;
+      width: fit-content;
+      background: rgba(249,250,252,.94);
+      box-shadow: 1px 0 0 0 rgba(31,45,61,.08), 0 1px 0 0 rgba(31,45,61,.08), -1px 0 0 0 rgba(31,45,61,.08), 0 -1px 0 0 rgba(31,45,61,.08);
+      transition-timing-function: cubic-bezier(.165,.84,.44,1);
+    }
+  }
+}
+
+.loader {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: #55D3D2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+
+  &__images {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 46px;
+
+    img {
+      height: 76px;
+      user-select: none;
+    }
+  }
+  &__bar {
+    height: 4px;
+    width: 160px;
+    display: flex;
+    background: rgba(#fff, .4);
+
+    span {
+      background: rgba(#fff, .9);
+      transition: all 1.5s cubic-bezier(0.09, 0.74, 0.72, 0.3);
+      width: 4%;
+    }
+    &--active {
+      span {
+        width: 99% !important;
+      }
+    }
+  }
+  &__site {
+    overflow: hidden;
+    display: fixed;
+  }
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}

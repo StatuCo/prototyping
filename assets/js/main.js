@@ -35,6 +35,9 @@ const app = new Vue({
       config: {
         activePage: 1,
         zoom: 1
+      },
+      screens: {
+        show: false
       }
     }
   },
@@ -94,6 +97,9 @@ const app = new Vue({
     getStylePercent($number) {
       return (($number/100)*this.getItemPercent).toFixed(0);
     },
+    getPageImageUrl(image) {
+      return `projects/${this.project}/${image}.png`
+    },
 
     setNewZoom($type) {
       let $zoom = this.config.zoom.toFixed(2);
@@ -119,6 +125,10 @@ const app = new Vue({
         if (this.config.activePage > 1) this.config.activePage -= 1;
         else this.config.activePage = this.config.page;
       }
+    },
+    setScreensPage($page) {
+      this.config.activePage = $page;
+      this.screens.show = false;
     }
   },
   computed: {
@@ -177,9 +187,12 @@ const app = new Vue({
   mounted() {
     let that = this;
     $(document).bind('keyup', function(event) {
-      // if (event.keyCode === 27) that.close();
-      if (event.keyCode === 37) that.setActivePage('prev');
-      if (event.keyCode === 39) that.setActivePage('next');
+      if (that.screens.show) {
+        if (event.keyCode === 27) that.screens.show = false;
+      } else {
+        if (event.keyCode === 37) that.setActivePage('prev');
+        if (event.keyCode === 39) that.setActivePage('next');
+      }
     });
   },
 }).$mount('#app');

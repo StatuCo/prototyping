@@ -1,0 +1,21 @@
+{
+  "name": "Gezgin 7/24",
+  "description": "Gezgin 7/24 projesi.",
+  "page": 7,
+  "prototype": {
+    "global": [
+      {
+        "position": { "left": "0", "top": "0", "width": "264", "height": "90" },
+        "type": "click",
+        "page": 1
+      }
+    ],
+    "page1": [
+      {
+        "position": { "left": "1246", "top": "442", "width": "170", "height": "68" },
+        "type": "click",
+        "page": 2
+      }
+    ]
+  }
+}

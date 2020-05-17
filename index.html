@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0"
+          name="viewport">
+    <link rel="manifest" href="config.json">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <meta name="robots" content="noindex">
+    <meta name="googlebot" content="noindex">
+
+    <title>Statu - Design & Development Studio</title>
+
+    <link rel="shortcut icon" href="">
+    <link rel="apple-touch-icon" href="">
+    <meta name="theme-color" content="#ffffff"/>
+
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/simplebar.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+  </head>
+  <body :class="{ 'loader__site' : !load.show }">
+    <script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+    <script src="https://unpkg.com/axios@0.19.0/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue-router@3.1.3/dist/vue-router.min.js"></script>
+
+    <div id="app">
+      <transition name="fade">
+        <div class="loader" v-show="!load.show">
+          <div class="loader__images">
+            <img draggable="false" src="assets/images/logo-statu.svg" alt="Statu Logo">
+          </div>
+          <div class="loader__bar" :class="{ 'loader__bar--active' : load.bar }"><span :style="{ width: load.barCount+'%' }"></span></div>
+        </div>
+      </transition>
+      <div data-simplebar data-simplebar-auto-hide="false" class="prototype" v-if="load.show">
+        <div class="prototype__zoom" :style="{ 'zoom': config.zoom }">
+          <div
+            :class="{ 'prototype__hotspot--active' : hotspot.activeItem }"
+            :style="{ 'max-width': getHotspotWidth }"
+            @click.self="getHotspotItems()"
+            class="prototype__hotspot"
+          >
+        <span
+          v-for="item in getPrototypeList"
+          @[item.type||click]="getPrototypeAction(item)"
+          :style="{left: getStylePercent(item.position.left)+'px', top: getStylePercent(item.position.top)+'px', width: getStylePercent(item.position.width)+'px', height: getStylePercent(item.position.height)+'px'}"
+        ></span>
+          </div>
+          <div class="prototype__screen">
+            <img
+              draggable="false"
+              class="prototype__screen-image"
+              :src="getActivePageImageUrl"
+              :alt="config.name+' Image'"
+              @load="getImageAxes()"
+            >
+          </div>
+        </div>
+        <div class="prototype__footer">
+          <button class="prototype__footer-item prototype__footer-button">Tüm Sayfalar</button>
+          <div class="prototype__footer-item prototype__footer-zoom">
+            <button @click="config.zoom -= .25"><i class="far fa-minus"></i></button>
+            <span>{{ config.zoom*100 }}%</span>
+            <button @click="config.zoom += .25"><i class="far fa-plus"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/js/simplebar.min.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

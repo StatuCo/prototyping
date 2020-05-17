@@ -21,7 +21,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900&display=swap" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/simplebar.min.css" rel="stylesheet">
-    <link href="assets/css/style.css?v=1.1.0" rel="stylesheet">
+    <link href="assets/css/style.css?v=1.1.1" rel="stylesheet">
   </head>
   <body :class="{ 'loader__site' : !load.show }">
     <script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
@@ -40,17 +40,15 @@
           <div class="loader__bar" :class="{ 'loader__bar--active' : load.bar }"><span :style="{ width: load.barCount+'%' }"></span></div>
         </div>
       </transition>
-      <div
+      <div class="prototype"
         data-simplebar
         data-simplebar-auto-hide="false"
-        class="prototype"
         v-if="load.show"
       >
-        <div class="prototype__zoom" :style="{ 'zoom': config.zoom }">
+        <div class="prototype__inner" :style="{ 'zoom': config.zoom, 'max-width': getHotspotWidth }">
           <div
             v-show="image.loading"
             :class="{ 'prototype__hotspot--active' : hotspot.activeItem }"
-            :style="{ 'max-width': getHotspotWidth }"
             @click.self="getHotspotItems()"
             class="prototype__hotspot"
           >
@@ -109,6 +107,6 @@
     <script src="assets/js/simplebar.min.js"></script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/main.js?v=1.1.0"></script>
+    <script src="assets/js/main.js?v=1.1.1"></script>
   </body>
 </html>

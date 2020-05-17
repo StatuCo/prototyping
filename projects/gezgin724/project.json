@@ -16,6 +16,18 @@
         "type": "click",
         "page": 2
       }
+    ],
+    "page2": [
+      {
+        "position": { "left": "304", "top": "556", "width": "548", "height": "358" },
+        "type": "click",
+        "page": 3
+      },
+      {
+        "position": { "left": "874", "top": "556", "width": "548", "height": "358" },
+        "type": "click",
+        "page": 3
+      }
     ]
   }
 }

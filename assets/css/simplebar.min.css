@@ -215,6 +215,9 @@
   background-color: #eee;
   opacity: .9;
 }
+.simplebar-dragging .simplebar-track {
+  z-index: 12;
+}
 .simplebar-dragging .simplebar-track .simplebar-scrollbar,
 .simplebar-track.simplebar-hover .simplebar-scrollbar {
   width: 100%;

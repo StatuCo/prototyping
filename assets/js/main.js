@@ -67,14 +67,43 @@ const app = new Vue({
       clearInterval(this.hotspot.activeTimer);
       this.hotspot.activeTimer = setInterval(() => {
         this.hotspot.activeItem = false;
-      }, 300)
+      }, 250)
     },
     getPrototypeAction($item) {
       if (!$item) return false;
+      this.hotspot.activeItem = false;
       this.config.activePage = $item.page;
     },
     getStylePercent($number) {
       return (($number/100)*this.getItemPercent).toFixed(0);
+    },
+    getPageImageUrl($image) {
+      return `projects/${this.project}/${$image}.png`
+    },
+
+    setNewZoom($type) {
+      let $zoom = this.config.zoom.toFixed(2);
+      if ($type === "minus") {
+        if ($zoom > .5) this.config.zoom -= .25;
+        if ($zoom <= .5 && $zoom > .1) this.config.zoom -= .1;
+      }
+      if ($type === "plus") {
+        if ($zoom >= .5 && $zoom < 1) this.config.zoom += .25;
+        if ($zoom < .5 && $zoom >= .1) this.config.zoom += .1;
+      }
+    },
+    setActivePage($type) {
+      // Scroll Top
+      SimpleBar.instances.get(document.querySelector('[data-simplebar]')).contentWrapperEl.scrollTo(0,0);
+
+      if ($type === "next") {
+        if (this.config.activePage < this.config.page) this.config.activePage += 1;
+        if (this.config.activePage === this.config.page) this.config.activePage = 1;
+      }
+      if ($type === "prev") {
+        if (this.config.activePage > 1) this.config.activePage -= 1;
+        else this.config.activePage = this.config.page;
+      }
     }
   },
   computed: {
@@ -95,6 +124,9 @@ const app = new Vue({
         })
       }
       return pagePrototypeList;
+    },
+    getZoomValue() {
+      return (this.config.zoom*100).toFixed(0);
     }
   },
   beforeCreate() {

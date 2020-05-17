@@ -114,7 +114,7 @@ const app = new Vue({
     },
     setActivePage($type) {
       // Scroll Top
-      SimpleBar.instances.get(document.querySelector('[data-simplebar]')).contentWrapperEl.scrollTo(0,0);
+      SimpleBar.instances.get(document.querySelector('.prototype')).contentWrapperEl.scrollTo(0,0);
       this.image.loading = false;
 
       if ($type === "next") {

@@ -58,18 +58,20 @@ const app = new Vue({
         loading: true
       })
 
-      let $window = $(window);
-      ($window.innerWidth() <= this.image.original)
-        ? this.image.changed = $window.innerWidth()
-        : this.image.changed = $image.prop("naturalWidth");
+      if (this.config.type === "mobile") {
+        this.image.changed = 375;
+      } else {
+        let $window = $(window);
+        ($window.innerWidth() <= this.image.original)
+          ? this.image.changed = $window.innerWidth()
+          : this.image.changed = $image.prop("naturalWidth");
 
-      $window.resize(() => {
-        if ($window.innerWidth() <= this.image.original) {
-          this.image.changed = $window.innerWidth()
-        } else {
-          this.image.changed = $image.prop("naturalWidth")
-        }
-      });
+        $window.resize(() => {
+          ($window.innerWidth() <= this.image.original)
+            ? this.image.changed = $window.innerWidth()
+            : this.image.changed = $image.prop("naturalWidth");
+        });
+      }
 
       this.image.badge.show = true;
       clearInterval(this.image.badge.timer);
@@ -124,7 +126,7 @@ const app = new Vue({
       return this.image.changed > 0 ? this.image.changed +'px' : null;
     },
     getActivePageImageUrl() {
-      return `https://project.statu.co/projects/${this.project}/${this.config.activePage}.png`
+      return `projects/${this.project}/${this.config.activePage}.png`
     },
     getItemPercent() {
       return ((100 * this.image.changed)/this.image.original).toFixed(2);
@@ -171,6 +173,14 @@ const app = new Vue({
     } else {
       window.location.href = "https://statu.co";
     }
+  },
+  mounted() {
+    let that = this;
+    $(document).bind('keyup', function(event) {
+      // if (event.keyCode === 27) that.close();
+      if (event.keyCode === 37) that.setActivePage('prev');
+      if (event.keyCode === 39) that.setActivePage('next');
+    });
   },
 }).$mount('#app');
 

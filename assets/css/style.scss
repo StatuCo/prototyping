@@ -44,6 +44,16 @@ body {
       max-width: 100%;
       user-select: none;
     }
+    &-loader {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      svg, path {
+        fill: #3c4858;
+      }
+    }
   }
   &__zoom {
     zoom: 1;
@@ -111,6 +121,14 @@ body {
         }
       }
     }
+    &-page {
+      background-color: rgba(31,45,61,.98);
+      white-space: nowrap;
+      padding: 0 10px;
+      color: #fff;
+      font-size: 14px;
+      line-height: 1;
+    }
   }
   &__nav {
     &-item {
@@ -118,7 +136,7 @@ body {
       width: 80px;
       height: 160px;
       top: 50%;
-      margin-top: -70px;
+      margin-top: -80px;
       opacity: .3;
       transition: all .2s ease-in-out;
       background: #000;
@@ -219,4 +237,15 @@ body {
 }
 .fade-enter, .fade-leave-to {
   opacity: 0;
+}
+
+.fadeBadge {
+  &-leave {
+    &-active { transition: opacity .5s; }
+    &-to { opacity: 0; }
+  }
+  &-enter {
+    opacity: 0;
+    &-active { transition: opacity .2s; }
+  }
 }

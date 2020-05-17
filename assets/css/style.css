@@ -33,6 +33,13 @@ body {
     .prototype__screen img {
       max-width: 100%;
       user-select: none; }
+    .prototype__screen-loader {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+      .prototype__screen-loader svg, .prototype__screen-loader path {
+        fill: #3c4858; }
   .prototype__zoom {
     zoom: 1; }
   .prototype__footer {
@@ -85,12 +92,19 @@ body {
       border-radius: 3px; }
       .prototype__footer-zoom button:hover {
         background: rgba(219, 219, 219, 0.4); }
+    .prototype__footer-page {
+      background-color: rgba(31, 45, 61, 0.98);
+      white-space: nowrap;
+      padding: 0 10px;
+      color: #fff;
+      font-size: 14px;
+      line-height: 1; }
   .prototype__nav-item {
     position: fixed;
     width: 80px;
     height: 160px;
     top: 50%;
-    margin-top: -70px;
+    margin-top: -80px;
     opacity: .3;
     transition: all .2s ease-in-out;
     background: #000;
@@ -164,5 +178,14 @@ body {
 
 .fade-enter, .fade-leave-to {
   opacity: 0; }
+
+.fadeBadge-leave-active {
+  transition: opacity .5s; }
+.fadeBadge-leave-to {
+  opacity: 0; }
+.fadeBadge-enter {
+  opacity: 0; }
+  .fadeBadge-enter-active {
+    transition: opacity .2s; }
 
 /*# sourceMappingURL=style.css.map */

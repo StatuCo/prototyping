@@ -23,7 +23,15 @@ const app = new Vue({
         activeTimer: null
       },
       window: { x: 0, y: 0 },
-      image: { original: 0, changed: 0 },
+      image: {
+        original: 0,
+        changed: 0,
+        loading: false,
+        badge: {
+          show: false,
+          timer: null
+        }
+      },
       config: {
         activePage: 1,
         zoom: 1
@@ -44,10 +52,11 @@ const app = new Vue({
     },
     getImageAxes() {
       let $image = $("img.prototype__screen-image");
-      this.image = {
+      Object.assign(this.image, {
         original: $image.prop("naturalWidth"),
-        changed: $image.prop("naturalWidth")
-      }
+        changed: $image.prop("naturalWidth"),
+        loading: true
+      })
 
       let $window = $(window);
       ($window.innerWidth() <= this.image.original)
@@ -61,6 +70,12 @@ const app = new Vue({
           this.image.changed = $image.prop("naturalWidth")
         }
       });
+
+      this.image.badge.show = true;
+      clearInterval(this.image.badge.timer);
+      this.image.badge.timer = setInterval(() => {
+        this.image.badge.show = false;
+      }, 1500)
     },
     getHotspotItems() {
       this.hotspot.activeItem = true;
@@ -77,9 +92,6 @@ const app = new Vue({
     getStylePercent($number) {
       return (($number/100)*this.getItemPercent).toFixed(0);
     },
-    getPageImageUrl($image) {
-      return `projects/${this.project}/${$image}.png`
-    },
 
     setNewZoom($type) {
       let $zoom = this.config.zoom.toFixed(2);
@@ -95,6 +107,7 @@ const app = new Vue({
     setActivePage($type) {
       // Scroll Top
       SimpleBar.instances.get(document.querySelector('[data-simplebar]')).contentWrapperEl.scrollTo(0,0);
+      this.image.loading = false;
 
       if ($type === "next") {
         if (this.config.activePage < this.config.page) this.config.activePage += 1;
@@ -111,7 +124,7 @@ const app = new Vue({
       return this.image.changed > 0 ? this.image.changed +'px' : null;
     },
     getActivePageImageUrl() {
-      return `projects/${this.project}/${this.config.activePage}.png`
+      return `https://project.statu.co/projects/${this.project}/${this.config.activePage}.png`
     },
     getItemPercent() {
       return ((100 * this.image.changed)/this.image.original).toFixed(2);

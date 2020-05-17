@@ -21,7 +21,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900&display=swap" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/simplebar.min.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style.css?v=1.1.0" rel="stylesheet">
   </head>
   <body :class="{ 'loader__site' : !load.show }">
     <script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
@@ -32,7 +32,10 @@
       <transition name="fade">
         <div class="loader" v-show="!load.show">
           <div class="loader__images">
-            <img draggable="false" src="assets/images/logo-statu.svg" alt="Statu Logo">
+            <svg width="108" height="90" viewBox="0 0 108 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M28.925 0H89L59.3337 58H28.925C21.2536 58 13.8964 54.9447 8.47193 49.5061C3.04744 44.0675 0 36.6913 0 29C0 21.3087 3.04744 13.9325 8.47193 8.4939C13.8964 3.05535 21.2536 0 28.925 0V0Z" fill="#002448"/>
+              <path d="M78.75 90H18L47.9996 32H78.75C86.5076 32 93.9475 35.0553 99.4329 40.4939C104.918 45.9325 108 53.3087 108 61C108 68.6913 104.918 76.0675 99.4329 81.5061C93.9475 86.9447 86.5076 90 78.75 90V90Z" fill="#0B3560"/>
+            </svg>
           </div>
           <div class="loader__bar" :class="{ 'loader__bar--active' : load.bar }"><span :style="{ width: load.barCount+'%' }"></span></div>
         </div>
@@ -45,27 +48,38 @@
       >
         <div class="prototype__zoom" :style="{ 'zoom': config.zoom }">
           <div
+            v-show="image.loading"
             :class="{ 'prototype__hotspot--active' : hotspot.activeItem }"
             :style="{ 'max-width': getHotspotWidth }"
             @click.self="getHotspotItems()"
             class="prototype__hotspot"
           >
-        <span
-          v-for="item in getPrototypeList"
-          @[item.type||click]="getPrototypeAction(item)"
-          :style="{left: getStylePercent(item.position.left)+'px', top: getStylePercent(item.position.top)+'px', width: getStylePercent(item.position.width)+'px', height: getStylePercent(item.position.height)+'px'}"
-        ></span>
+            <span
+              v-for="item in getPrototypeList"
+              @[item.type||click]="getPrototypeAction(item)"
+              :style="{left: getStylePercent(item.position.left)+'px', top: getStylePercent(item.position.top)+'px', width: getStylePercent(item.position.width)+'px', height: getStylePercent(item.position.height)+'px'}"
+            ></span>
           </div>
           <div class="prototype__screen">
-            <img
-              v-for="image in config.page"
-              v-show="image === config.activePage"
-              draggable="false"
-              class="prototype__screen-image"
-              :src="getPageImageUrl(image)"
-              :alt="config.name+' Image'"
-              @load="getImageAxes()"
-            >
+            <transition>
+              <img
+                v-show="image.loading"
+                draggable="false"
+                class="prototype__screen-image"
+                :src="getActivePageImageUrl"
+                :alt="config.name+' Image'"
+                @load="getImageAxes()"
+              >
+            </transition>
+            <div class="prototype__screen-loader" v-show="!image.loading">
+              <svg height="50px" width="50px" viewBox="0 0 50 50" x="0px" xmlns="http://www.w3.org/2000/svg" y="0px">
+                <path
+                  d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z"
+                  fill="#000" transform="rotate(64.6404 25 25)">
+                  <animateTransform attributeName="transform" attributeType="xml" dur="0.6s" from="0 25 25" repeatCount="indefinite" to="360 25 25" type="rotate"></animateTransform>
+                </path>
+              </svg>
+            </div>
           </div>
         </div>
         <div class="prototype__footer">
@@ -75,6 +89,11 @@
             <span>{{ getZoomValue }}%</span>
             <button @click="setNewZoom('plus')"><i class="far fa-plus"></i></button>
           </div>
+          <transition name="fadeBadge">
+            <div class="prototype__footer-item prototype__footer-page" v-show="image.badge.show">
+              {{ config.activePage }} / {{ config.page }} — {{ config.activePage }}.png
+            </div>
+          </transition>
         </div>
       </div>
       <div class="prototype__nav">
@@ -90,6 +109,6 @@
     <script src="assets/js/simplebar.min.js"></script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="assets/js/main.js?v=1.1.0"></script>
   </body>
 </html>

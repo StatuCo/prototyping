@@ -104,12 +104,12 @@ const app = new Vue({
     setNewZoom($type) {
       let $zoom = this.config.zoom.toFixed(2);
       if ($type === "minus") {
-        if ($zoom > .5) this.config.zoom -= .25;
-        if ($zoom <= .5 && $zoom > .1) this.config.zoom -= .1;
+        if ($zoom > .5) this.config.zoom -= .1;
+        if ($zoom <= .5 && $zoom > .2) this.config.zoom -= .05;
       }
       if ($type === "plus") {
-        if ($zoom >= .5 && $zoom < 1) this.config.zoom += .25;
-        if ($zoom < .5 && $zoom >= .1) this.config.zoom += .1;
+        if ($zoom >= .5 && $zoom < 1) this.config.zoom += .1;
+        if ($zoom < .5 && $zoom >= .1) this.config.zoom += .05;
       }
     },
     setActivePage($type) {

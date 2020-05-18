@@ -128,9 +128,11 @@ const app = new Vue({
     },
     setScreensPage($page) {
       SimpleBar.instances.get(document.querySelector('.prototype')).contentWrapperEl.scrollTo(0,0);
-      this.image.loading = false;
-      
-      this.config.activePage = $page;
+      if (this.config.activePage !== $page) {
+        this.image.loading = false;
+        this.config.activePage = $page;
+      }
+
       this.screens.show = false;
     }
   },

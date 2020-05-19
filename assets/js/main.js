@@ -91,6 +91,8 @@ const app = new Vue({
     },
     getPrototypeAction($item) {
       if (!$item) return false;
+      SimpleBar.instances.get(document.querySelector('.prototype')).contentWrapperEl.scrollTo(0,0);
+
       this.hotspot.activeItem = false;
       this.config.activePage = $item.page;
     },
@@ -141,7 +143,7 @@ const app = new Vue({
       return this.image.changed > 0 ? this.image.changed +'px' : null;
     },
     getActivePageImageUrl() {
-      return `projects/${this.project}/${this.config.activePage}.png`
+      return this.getPageImageUrl(this.config.activePage);
     },
     getItemPercent() {
       return ((100 * this.image.changed)/this.image.original).toFixed(2);

@@ -100,7 +100,7 @@ const app = new Vue({
       return (($number/100)*this.getItemPercent).toFixed(0);
     },
     getPageImageUrl(image) {
-      return `projects/${this.project}/${image}.png`
+      return `projects/${this.project}/${image}.png?build=${this.config.build || 1}`
     },
 
     setNewZoom($type) {

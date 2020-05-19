@@ -120,8 +120,8 @@ const app = new Vue({
       this.image.loading = false;
 
       if ($type === "next") {
-        if (this.config.activePage < this.config.page) this.config.activePage += 1;
         if (this.config.activePage === this.config.page) this.config.activePage = 1;
+        else this.config.activePage += 1;
       }
       if ($type === "prev") {
         if (this.config.activePage > 1) this.config.activePage -= 1;
